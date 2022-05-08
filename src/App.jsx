@@ -23,15 +23,6 @@ function App() {
     };
 
     fetchPosts();
-
-    // const fetchNames = async () => {
-    //   setIsLoading(true);
-    //   const res = await axios.get("https://www.officeapi.dev/api/characters");
-    //   setNames(res.data.data.sort(() => Math.random() - 0.5));
-    //   setIsLoading(false);
-    // };
-
-    // fetchNames();
   }, []);
 
   useEffect(() => {
@@ -44,11 +35,12 @@ function App() {
     fetchNames();
 
     setIsClicked(false)
-  }, [currentPost])
+  }, [posts[currentPost]])
 
 if(currentPost === 10) {
   return <div>congratulations you have {points} points</div>
 }
+
 
   return (
     <div className="container">

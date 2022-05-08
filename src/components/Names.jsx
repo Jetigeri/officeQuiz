@@ -24,6 +24,7 @@ const Names = ({
       correct: false,
     },
   ];
+  
 
   return (
     <div>
