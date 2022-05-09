@@ -3,29 +3,39 @@ import "./Name.css";
 
 const Name = ({
   choice,
-  setIsClicked,
-  isClicked,
+  setTrueClicked,
+  trueClicked,
   posts,
   currentPost,
   setCurrentPost,
   setPoints,
+  falseClicked,
+  setFalseClicked,
 }) => {
   return (
     <div>
       <p
+        style={{ cursor: "pointer" }}
         onClick={() => {
           if (choice._id === posts[currentPost]?.character._id) {
-            setIsClicked(true);
+            setTrueClicked(true);
             setPoints((prevPoints) => prevPoints + 1);
             console.log(choice, "its true");
-            setTimeout(() => {
-              setCurrentPost((prevPost) => prevPost + 1);
-            }, 3000);
-          } else alert("YOU ASS!!!😡");
+          } else {
+            setFalseClicked(true);
+            console.log("false");
+          }
+          setTimeout(() => {
+            setCurrentPost((prevPost) => prevPost + 1);
+          }, 3000);
         }}
         className={`${
-          choice._id === posts[currentPost]?.character._id && isClicked
+          choice._id === posts[currentPost]?.character._id && trueClicked
             ? "correct"
+            : ""
+        } ${
+          choice._id !== posts[currentPost]?.character._id && falseClicked
+            ? "incorrect"
             : ""
         }`}
       >

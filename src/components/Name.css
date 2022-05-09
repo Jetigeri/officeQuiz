@@ -1,3 +1,45 @@
 .correct {
-  color: green;
+  background-color: rgb(38, 167, 38);
+  animation: correct-blinking 1s infinite;
+}
+
+@keyframes correct-blinking {
+  0% {
+    background-color: white;
+  }
+
+  49% {
+    background-color: white;
+  }
+
+  50% {
+    background-color: rgb(38, 167, 38);
+  }
+
+  100% {
+    background-color: rgb(38, 167, 38);
+  }
+}
+
+.incorrect {
+  background-color: rgb(255, 81, 0);
+  animation: incorrect-blinking 1s infinite;
+}
+
+@keyframes blinking {
+  0% {
+    background-color: white;
+  }
+
+  49% {
+    background-color: white;
+  }
+
+  50% {
+    background-color: rgb(255, 81, 0);
+  }
+
+  100% {
+    background-color: rgb(255, 81, 0);
+  }
 }

@@ -7,35 +7,24 @@ const Names = ({
   posts,
   currentPost,
   setCurrentPost,
-  isClicked,
-  setIsClicked,
+  trueClicked,
+  setTrueClicked,
   setPoints,
+  falseClicked,
+  setFalseClicked
 }) => {
-  const choicesNotIncludingSolution = names
-    .filter((name) => name._id !== posts[currentPost]?.character._id)
-    .slice(0, 3);
-
-  const possibleChoices = [
-    ...choicesNotIncludingSolution,
-    {
-      _id: posts[currentPost]?.character._id,
-      firstname: posts[currentPost]?.character.firstname,
-      lastname: posts[currentPost]?.character.lastname,
-      correct: false,
-    },
-  ];
-  
 
   return (
     <div>
-      {possibleChoices
-        .sort(() => Math.random() - 0.5)
+      {names
         .map((choice) => (
           <Name
             key={Math.random()}
             choice={choice}
-            setIsClicked={setIsClicked}
-            isClicked={isClicked}
+            setTrueClicked={setTrueClicked}
+            trueClicked={trueClicked}
+            setFalseClicked={setFalseClicked}
+            falseClicked={falseClicked}
             posts={posts}
             currentPost={currentPost}
             setCurrentPost={setCurrentPost}

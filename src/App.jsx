@@ -11,8 +11,9 @@ function App() {
   const [names, setNames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPost, setCurrentPost] = useState(0);
-  const [isClicked, setIsClicked] = useState(false)
-  const [points, setPoints] = useState(0)
+  const [trueClicked, setTrueClicked] = useState(false);
+  const [falseClicked, setFalseClicked] = useState(false);
+  const [points, setPoints] = useState(0);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -29,18 +30,32 @@ function App() {
     const fetchNames = async () => {
       setIsLoading(true);
       const res = await axios.get("https://www.officeapi.dev/api/characters");
-      setNames(res.data.data.sort(() => Math.random() - 0.5));
+
+      const choicesNotIncludingSolution = res.data.data
+        .filter((name) => name._id !== posts[currentPost]?.character._id)
+        .slice(0, 3);
+
+      const possibleChoices = [
+        ...choicesNotIncludingSolution,
+        {
+          _id: posts[currentPost]?.character._id,
+          firstname: posts[currentPost]?.character.firstname,
+          lastname: posts[currentPost]?.character.lastname,
+        },
+      ];
+
+      setNames(possibleChoices.sort(() => Math.random() - 0.5));
       setIsLoading(false);
     };
     fetchNames();
 
-    setIsClicked(false)
-  }, [posts[currentPost]])
+    setTrueClicked(false);
+    setFalseClicked(false);
+  }, [posts[currentPost]]);
 
-if(currentPost === 10) {
-  return <div>congratulations you have {points} points</div>
-}
-
+  if (currentPost === 10) {
+    return <div>congratulations you have {points} points</div>;
+  }
 
   return (
     <div className="container">
@@ -58,8 +73,10 @@ if(currentPost === 10) {
         names={names}
         currentPost={currentPost}
         setCurrentPost={setCurrentPost}
-        isClicked={isClicked}
-        setIsClicked={setIsClicked}
+        trueClicked={trueClicked}
+        setTrueClicked={setTrueClicked}
+        falseClicked={falseClicked}
+        setFalseClicked={setFalseClicked}
         setPoints={setPoints}
       ></Names>
     </div>
