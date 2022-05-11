@@ -11,8 +11,6 @@ function App() {
   const [names, setNames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPost, setCurrentPost] = useState(0);
-  const [trueClicked, setTrueClicked] = useState(false);
-  const [falseClicked, setFalseClicked] = useState(false);
   const [points, setPoints] = useState(0);
 
   useEffect(() => {
@@ -33,6 +31,9 @@ function App() {
 
       const choicesNotIncludingSolution = res.data.data
         .filter((name) => name._id !== posts[currentPost]?.character._id)
+        .map((choice) => {
+          return { ...choice, isCorrect: false };
+        })
         .slice(0, 3);
 
       const possibleChoices = [
@@ -41,6 +42,7 @@ function App() {
           _id: posts[currentPost]?.character._id,
           firstname: posts[currentPost]?.character.firstname,
           lastname: posts[currentPost]?.character.lastname,
+          isCorrect: true,
         },
       ];
 
@@ -49,36 +51,43 @@ function App() {
     };
     fetchNames();
 
-    setTrueClicked(false);
-    setFalseClicked(false);
+
   }, [posts[currentPost]]);
 
   if (currentPost === 10) {
-    return <div>congratulations you have {points} points</div>;
+    return (
+      <div>
+        <h4>congratulations you have {points} points</h4>
+        <div>
+          <h4>Would you like to play again?</h4>
+          <div>
+            <button onClick={() => setCurrentPost(0)}>Yes.</button>
+            <button>Nope.</button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="container">
-      <h1 className="display-1 text-center gray mb-5" style={{ color: "grey" }}>
-        The Office Quiz Game
-      </h1>
-      <h6>{`Question ${currentPost + 1} out of ${posts.length}`}</h6>
-      <Posts
-        posts={posts}
-        isLoading={isLoading}
-        currentPost={currentPost}
-      ></Posts>
-      <Names
-        posts={posts}
-        names={names}
-        currentPost={currentPost}
-        setCurrentPost={setCurrentPost}
-        trueClicked={trueClicked}
-        setTrueClicked={setTrueClicked}
-        falseClicked={falseClicked}
-        setFalseClicked={setFalseClicked}
-        setPoints={setPoints}
-      ></Names>
+      <div className="header-container">
+        <h1 className="display-1 text-center mb-5">The Office Quiz Game</h1>
+      </div>
+      <h6 className="mb-3">{`Question ${currentPost + 1} out of ${posts.length}`}</h6>
+      <div>
+        <Posts
+          posts={posts}
+          isLoading={isLoading}
+          currentPost={currentPost}
+        ></Posts>
+        <Names
+          names={names}
+          currentPost={currentPost}
+          setCurrentPost={setCurrentPost}
+          setPoints={setPoints}
+        ></Names>
+      </div>
     </div>
   );
 }

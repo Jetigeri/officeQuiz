@@ -4,33 +4,30 @@ import Name from "./Name";
 
 const Names = ({
   names,
-  posts,
+
   currentPost,
   setCurrentPost,
-  trueClicked,
-  setTrueClicked,
+  isClicked,
+  setIsClicked,
   setPoints,
-  falseClicked,
-  setFalseClicked
+  solution,
 }) => {
+  const newNames = names.map((name) => {
+    return { ...name, falseClicked: false };
+  });
 
   return (
     <div>
-      {names
-        .map((choice) => (
-          <Name
-            key={Math.random()}
-            choice={choice}
-            setTrueClicked={setTrueClicked}
-            trueClicked={trueClicked}
-            setFalseClicked={setFalseClicked}
-            falseClicked={falseClicked}
-            posts={posts}
-            currentPost={currentPost}
-            setCurrentPost={setCurrentPost}
-            setPoints={setPoints}
-          ></Name>
-        ))}
+      {newNames.map((choice) => (
+        <Name
+          key={Math.random()}
+          solution={solution}
+          choice={choice}
+          currentPost={currentPost}
+          setCurrentPost={setCurrentPost}
+          setPoints={setPoints}
+        ></Name>
+      ))}
     </div>
   );
 };

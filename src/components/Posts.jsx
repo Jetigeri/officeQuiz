@@ -3,7 +3,7 @@ import React from "react";
 const Posts = ({ posts, isLoading, currentPost }) => {
   if (isLoading) {
     return (
-      <div className="spinner-border" role="status">
+      <div className="spinner-border text-light" role="status">
         <span className="visually-hidden">Loading...</span>
       </div>
     );
@@ -11,7 +11,7 @@ const Posts = ({ posts, isLoading, currentPost }) => {
 
   return (
     <div>
-      <h4>{posts[currentPost]?.content}</h4>
+      <h4 className="mb-5">{posts[currentPost]?.content}</h4>
     </div>
   );
 };

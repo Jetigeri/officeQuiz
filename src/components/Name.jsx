@@ -1,43 +1,45 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./Name.css";
 
 const Name = ({
   choice,
-  setTrueClicked,
-  trueClicked,
-  posts,
-  currentPost,
   setCurrentPost,
   setPoints,
-  falseClicked,
-  setFalseClicked,
 }) => {
+  const [style, setStyle] = useState({ transform: `rotate(0deg)` });
+  const [choiceClass, setChoiceClass] = useState("choice")
+
+  const answer = useRef();
+
+  let randomNr =
+    Math.ceil(Math.random() * 6) * (Math.round(Math.random()) ? 1 : -1);
+
+  const clickHandler = (e) => {
+    if (choice.isCorrect) {
+      console.log("correctomondo");
+      // setPoints((prevPoints) => prevPoints + 1);
+      setChoiceClass("choice correct")
+      // answer.current.style.backgroundColor = "green";
+    }
+    if (!choice.isCorrect) {
+      console.log("NEM KORREKT BAZMEG")
+      setChoiceClass("choice incorrect")
+      // answer.current.style.backgroundColor = "red";
+    }
+    setTimeout(() => {
+      setCurrentPost((prevPost) => prevPost + 1);
+    }, 2000);
+  };
+
   return (
     <div>
       <p
-        style={{ cursor: "pointer" }}
-        onClick={() => {
-          if (choice._id === posts[currentPost]?.character._id) {
-            setTrueClicked(true);
-            setPoints((prevPoints) => prevPoints + 1);
-            console.log(choice, "its true");
-          } else {
-            setFalseClicked(true);
-            console.log("false");
-          }
-          setTimeout(() => {
-            setCurrentPost((prevPost) => prevPost + 1);
-          }, 3000);
-        }}
-        className={`${
-          choice._id === posts[currentPost]?.character._id && trueClicked
-            ? "correct"
-            : ""
-        } ${
-          choice._id !== posts[currentPost]?.character._id && falseClicked
-            ? "incorrect"
-            : ""
-        }`}
+        onMouseEnter={() => setStyle({ transform: `rotate(${randomNr}deg)` })}
+        onMouseLeave={() => setStyle({ transform: "rotate(0deg)" })}
+        style={style}
+        onClick={(e) => clickHandler(e)}
+        ref={answer}
+        className={`${choiceClass}`}
       >
         {choice.firstname} {choice.lastname}
       </p>

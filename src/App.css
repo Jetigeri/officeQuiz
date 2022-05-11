@@ -1,10 +1,25 @@
+* {
+  font-family: "Special Elite", cursive;
+  color: rgb(5, 130, 135);
+  text-shadow: 1px 1px 0.5px rgb(0, 0, 0);
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background: radial-gradient(at bottom, rgb(141, 216, 247), rgb(21, 190, 243));
+  height: 100vh;
+}
+
+.header-container {
+  margin-top: 2rem;
+  background-color: white;
+  border-radius: 2px;
+  transform: rotate(-2deg);
+  filter: drop-shadow(1px 5px 3px rgba(13, 62, 85, 0.487));
 }
 
 @media (prefers-reduced-motion: no-preference) {
