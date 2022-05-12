@@ -13,6 +13,7 @@ function App() {
   const [currentPost, setCurrentPost] = useState(0);
   const [points, setPoints] = useState(0);
 
+
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
@@ -50,31 +51,40 @@ function App() {
       setIsLoading(false);
     };
     fetchNames();
-
-
   }, [posts[currentPost]]);
+
+  
 
   if (currentPost === 10) {
     return (
-      <div>
-        <h4>congratulations you have {points} points</h4>
+      <div className="position-absolute top-50 start-50 translate-middle text-center">
+        <h4>Congratulations you got </h4>
+        <h2 className="mb-5">{points} points</h2>
         <div>
           <h4>Would you like to play again?</h4>
-          <div>
-            <button onClick={() => setCurrentPost(0)}>Yes.</button>
-            <button>Nope.</button>
+          <div className="btn-container">
+            <button className="choice" onClick={() => setCurrentPost(0)}>
+              Yes.
+            </button>
+            <button className="choice">
+              Nope.
+            </button>
           </div>
         </div>
       </div>
     );
   }
 
+
+
   return (
     <div className="container">
       <div className="header-container">
         <h1 className="display-1 text-center mb-5">The Office Quiz Game</h1>
       </div>
-      <h6 className="mb-3">{`Question ${currentPost + 1} out of ${posts.length}`}</h6>
+      <h6 className="mb-3">{`Question ${currentPost + 1} out of ${
+        posts.length
+      }`}</h6>
       <div>
         <Posts
           posts={posts}
