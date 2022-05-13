@@ -19,6 +19,9 @@ const Name = ({ choice, setCurrentPost, setPoints, points }) => {
       setChoiceClass("incorrect");
     }
 
+    console.log(answer.current.style)
+    answer.current.style.pointerEvents = "none"
+
     setTimeout(() => {
       if(choice.isCorrect) {
         setPoints((prevPoints) => prevPoints + 1); //so if i put setPoints here its working, somehow it interferes with the class
@@ -27,7 +30,6 @@ const Name = ({ choice, setCurrentPost, setPoints, points }) => {
 
     setTimeout(() => {
       setCurrentPost((prevPost) => prevPost + 1);
-     
     }, 2000);
   };
 
@@ -38,7 +40,7 @@ const Name = ({ choice, setCurrentPost, setPoints, points }) => {
         onMouseLeave={() => setStyle({ transform: "rotate(0deg)" })}
         style={style}
         onClick={(e) => clickHandler(e)}
-        // ref={answer}
+        ref={answer}
         className={`choice ${choiceClass}`}
       >
         {choice.firstname} {choice.lastname}
