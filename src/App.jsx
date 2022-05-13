@@ -12,6 +12,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPost, setCurrentPost] = useState(0);
   const [points, setPoints] = useState(0);
+  const [gameEnded, setGameEnded] = useState(false)
 
 
   useEffect(() => {
@@ -21,9 +22,9 @@ function App() {
       setPosts(res.data.data.sort(() => Math.random() - 0.5).slice(0, 10));
       setIsLoading(false);
     };
-
+    setGameEnded(false)
     fetchPosts();
-  }, []);
+  }, [gameEnded]);
 
   useEffect(() => {
     const fetchNames = async () => {
@@ -56,6 +57,7 @@ function App() {
   const resetPostsAndPoints = () => {
     setCurrentPost(0)
     setPoints(0)
+    setGameEnded(true)
   }
 
   if (currentPost === 10) {
@@ -88,7 +90,7 @@ function App() {
       <h6 className="mb-3">{`Question ${currentPost + 1} out of ${
         posts.length
       }`}</h6>
-      <h6>points: {points}</h6>
+      {/* <h6>points: {points}</h6> */}
       <div>
         <Posts
           posts={posts}
