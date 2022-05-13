@@ -1,13 +1,9 @@
 import React, { useRef, useState } from "react";
 import "./Name.css";
 
-const Name = ({
-  choice,
-  setCurrentPost,
-  setPoints,
-}) => {
+const Name = ({ choice, setCurrentPost, setPoints, points }) => {
   const [style, setStyle] = useState({ transform: `rotate(0deg)` });
-  const [choiceClass, setChoiceClass] = useState("choice")
+  const [choiceClass, setChoiceClass] = useState(null)
 
   const answer = useRef();
 
@@ -16,18 +12,22 @@ const Name = ({
 
   const clickHandler = (e) => {
     if (choice.isCorrect) {
-      console.log("correctomondo");
-      // setPoints((prevPoints) => prevPoints + 1);
-      setChoiceClass("choice correct")
-      // answer.current.style.backgroundColor = "green";
+      setChoiceClass("correct"); //sets class on chosen answer (works perfectly if setPoints is commented out 😡)
+      //setPoints((prevPoints) => prevPoints + 1); //sets adds points (works perfectly, but disables setChoiceClass somehow AKURVAANYÁDATMÁR)
     }
     if (!choice.isCorrect) {
-      console.log("NEM KORREKT BAZMEG")
-      setChoiceClass("choice incorrect")
-      // answer.current.style.backgroundColor = "red";
+      setChoiceClass("incorrect");
     }
+
+    setTimeout(() => {
+      if(choice.isCorrect) {
+        setPoints((prevPoints) => prevPoints + 1); //so if i put setPoints here its working, somehow it interferes with the class
+      }
+    }, 1500)
+
     setTimeout(() => {
       setCurrentPost((prevPost) => prevPost + 1);
+     
     }, 2000);
   };
 
@@ -38,8 +38,8 @@ const Name = ({
         onMouseLeave={() => setStyle({ transform: "rotate(0deg)" })}
         style={style}
         onClick={(e) => clickHandler(e)}
-        ref={answer}
-        className={`${choiceClass}`}
+        // ref={answer}
+        className={`choice ${choiceClass}`}
       >
         {choice.firstname} {choice.lastname}
       </p>

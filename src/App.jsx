@@ -53,7 +53,10 @@ function App() {
     fetchNames();
   }, [posts[currentPost]]);
 
-  
+  const resetPostsAndPoints = () => {
+    setCurrentPost(0)
+    setPoints(0)
+  }
 
   if (currentPost === 10) {
     return (
@@ -63,7 +66,7 @@ function App() {
         <div>
           <h4>Would you like to play again?</h4>
           <div className="btn-container">
-            <button className="choice" onClick={() => setCurrentPost(0)}>
+            <button className="choice" onClick={() => resetPostsAndPoints()}>
               Yes.
             </button>
             <button className="choice">
@@ -85,6 +88,7 @@ function App() {
       <h6 className="mb-3">{`Question ${currentPost + 1} out of ${
         posts.length
       }`}</h6>
+      <h6>points: {points}</h6>
       <div>
         <Posts
           posts={posts}
@@ -96,6 +100,7 @@ function App() {
           currentPost={currentPost}
           setCurrentPost={setCurrentPost}
           setPoints={setPoints}
+          points={points}
         ></Names>
       </div>
     </div>
