@@ -101,7 +101,8 @@
   }
 }
 
-.choice {
+.choice,
+.main-btn {
   display: inline-block;
   padding: 2px 8px 2px 8px;
   background-color: white;
@@ -109,8 +110,17 @@
   filter: drop-shadow(1px 5px 3px rgba(13, 62, 85, 0.487));
   transition: 0.05s ease-in-out;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .choice:hover {
   font-size: 1.1rem;
+}
+
+.main-btn:hover {
+  font-size: 3rem;
+}
+
+li {
+  list-style-type: none;
 }

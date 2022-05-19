@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import "./Name.css";
 
-const Name = ({ choice, setCurrentPost, setPoints, points }) => {
+const Name = ({ choice, setCurrentPost, setPoints, points, pointsHandler }) => {
   const [style, setStyle] = useState({ transform: `rotate(0deg)` });
-  const [choiceClass, setChoiceClass] = useState(null)
+  const [choiceClass, setChoiceClass] = useState(null);
 
   const answer = useRef();
 
@@ -13,20 +13,18 @@ const Name = ({ choice, setCurrentPost, setPoints, points }) => {
   const clickHandler = (e) => {
     if (choice.isCorrect) {
       setChoiceClass("correct"); //sets class on chosen answer (works perfectly if setPoints is commented out 😡)
-      //setPoints((prevPoints) => prevPoints + 1); //sets adds points (works perfectly, but disables setChoiceClass somehow AKURVAANYÁDATMÁR)
     }
     if (!choice.isCorrect) {
       setChoiceClass("incorrect");
     }
 
-    console.log(answer.current.style)
-    answer.current.style.pointerEvents = "none"
+    answer.current.style.pointerEvents = "none";
 
     setTimeout(() => {
-      if(choice.isCorrect) {
+      if (choice.isCorrect) {
         setPoints((prevPoints) => prevPoints + 1); //so if i put setPoints here its working, somehow it interferes with the class
       }
-    }, 1500)
+    }, 1000);
 
     setTimeout(() => {
       setCurrentPost((prevPost) => prevPost + 1);
