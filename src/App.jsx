@@ -7,7 +7,7 @@ import LandingPage from "./components/LandingPage";
 import GameEnd from "./components/GameEnd";
 import MainGame from "./components/MainGame";
 
-const GAME_OVER = 3;
+const GAME_OVER = 10;
 
 function App() {
   const [currentPost, setCurrentPost] = useState(0);
