@@ -33,6 +33,7 @@ function App() {
   if (gameStarted) {
     return (
       <MainGame
+        GAME_OVER={GAME_OVER}
         gameEnded={gameEnded}
         setGameEnded={setGameEnded}
         currentPost={currentPost}
@@ -45,15 +46,7 @@ function App() {
 
   return (
     <div className="container">
-      <LandingPage setGameStarted={setGameStarted}></LandingPage>
-      {/* <MainGame
-        gameEnded={gameEnded}
-        setGameEnded={setGameEnded}
-        currentPost={currentPost}
-        setCurrentPost={setCurrentPost}
-        points={points}
-        setPoints={setPoints}
-      ></MainGame> */}
+      <LandingPage setGameStarted={setGameStarted} GAME_OVER={GAME_OVER}></LandingPage>
     </div>
   );
 }

@@ -1,24 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import Name from "./Name";
 
-const Names = ({
-  names,
-  currentPost,
-  setCurrentPost,
-  points,
-  setPoints,
- 
-
-}) => {
-  const [correctAnswer, setCorrectAnswer] = useState()
-
-
+const Names = ({ names, currentPost, setCurrentPost, points, setPoints }) => {
   const newNames = names.map((name) => {
     return { ...name, falseClicked: false };
   });
-
-
 
   return (
     <div>
@@ -29,9 +16,7 @@ const Names = ({
           currentPost={currentPost}
           setCurrentPost={setCurrentPost}
           setPoints={setPoints}
-       
           points={points}
-        
         ></Name>
       ))}
     </div>

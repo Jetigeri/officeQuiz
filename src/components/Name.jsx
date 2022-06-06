@@ -16,19 +16,19 @@ const Name = ({ choice, setCurrentPost, setPoints, points, pointsHandler }) => {
     }
     if (!choice.isCorrect) {
       setChoiceClass("incorrect");
+      answer.current.style.pointerEvents = "none";
     }
-
-    answer.current.style.pointerEvents = "none";
-
     setTimeout(() => {
       if (choice.isCorrect) {
         setPoints((prevPoints) => prevPoints + 1); //so if i put setPoints here its working, somehow it interferes with the class
+        answer.current.style.pointerEvents = "none";
       }
     }, 1000);
 
     setTimeout(() => {
       setCurrentPost((prevPost) => prevPost + 1);
     }, 2000);
+    answer.current.style.pointerEvents = "none";
   };
 
   return (

@@ -13,6 +13,7 @@ const MainGame = ({
   currentPost,
   points,
   setPoints,
+  GAME_OVER
 }) => {
   const [posts, setPosts] = useState([]);
   const [names, setNames] = useState([]);
@@ -24,7 +25,7 @@ const MainGame = ({
       const serverResponse = axios.get("https://www.officeapi.dev/api/quotes/");
       const res = await serverResponse;
       serverResponse.catch((error) => console.log(error, "this is error"));
-      setPosts(res.data.data.sort(() => Math.random() - 0.5).slice(0, 10));
+      setPosts(res.data.data.sort(() => Math.random() - 0.5).slice(0, GAME_OVER));
       setIsLoading(false);
     };
     setGameEnded(false);
